@@ -1,0 +1,164 @@
+openapi: 3.0.0
+info:
+  title: API de Personajes
+  description: API para crear y actualizar personajes de películas/series
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /characters:
+    post:
+      summary: Crear un nuevo personaje
+      description: Crea un nuevo personaje asociado a una película/serie existente.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imagen:
+                  type: string
+                  description: URL de la imagen del personaje.
+                nombre:
+                  type: string
+                  description: Nombre del personaje.
+                edad:
+                  type: integer
+                  description: Edad del personaje.
+                peso:
+                  type: string
+                  description: Peso del personaje.
+                historia:
+                  type: string
+                  description: Historia del personaje.
+                nombrePelicula:
+                  type: string
+                  description: Nombre de la película/serie asociada al personaje.
+                peliculaId:
+                  type: integer
+                  description: ID de la película/serie asociada al personaje.
+              required:
+                - imagen
+                - nombre
+                - edad
+                - peso
+                - historia
+                - nombrePelicula
+                - peliculaId
+      responses:
+        "201":
+          description: Personaje creado correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Personaje"
+        "400":
+          description: Solicitud inválida.
+        "401":
+          description: No autorizado.
+        "404":
+          description: La película/serie no existe.
+        "500":
+          description: Error interno del servidor.
+    put:
+      summary: Actualizar un personaje existente
+      description: Actualiza los datos de un personaje existente.
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          description: ID del personaje a actualizar.
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                edad:
+                  type: integer
+                  description: Nueva edad del personaje.
+                pelicula:
+                  type: string
+                  description: Nueva película/serie asociada al personaje.
+              required:
+                - edad
+                - pelicula
+      responses:
+        "200":
+          description: Personaje actualizado correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Personaje"
+        "400":
+          description: Solicitud inválida.
+        "401":
+          description: No autorizado.
+        "404":
+          description: Personaje no encontrado.
+        "500":
+          description: Error interno del servidor.
+    delete:
+      summary: Eliminar un personaje existente
+      description: Elimina un personaje existente por su ID.
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          description: ID del personaje a eliminar.
+          required: true
+      responses:
+        "200":
+          description: Personaje eliminado correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Mensaje de confirmación.
+        "400":
+          description: Solicitud inválida.
+        "401":
+          description: No autorizado.
+        "404":
+          description: Personaje no encontrado.
+        "500":
+          description: Error interno del servidor.
+components:
+  schemas:
+    Personaje:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID del personaje.
+        imagen:
+          type: string
+          description: URL de la imagen del personaje.
+        nombre:
+          type: string
+          description: Nombre del personaje.
+        edad:
+          type: integer
+          description: Edad del personaje.
+        peso:
+          type: string
+          description: Peso del personaje.
+        historia:
+          type: string
+          description: Historia del personaje.
+        nombrePelicula:
+          type: string
+          description: Nombre de la película/serie asociada al personaje.
+        peliculaId:
+          type: integer
+          description: ID de la película/serie asociada al personaje.
+
+  
