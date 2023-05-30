@@ -9,14 +9,14 @@ const router = express.Router();
 
 // Ruta de login
 router.post("/auth/login", async (req, res) => {
-  const { username, contraseña } = req.body;
+  const { username, password } = req.body;
 
   try {
     // Buscar el usuario en la base de datos
     const usuario = await Usuario.findOne({ where: { username } });
 
     // Verificar si usuario existe
-    if (!usuario || !bcrypt.compareSync(contraseña, usuario.contraseña)) {
+    if (!usuario || !bcrypt.compareSync(password, usuario.password)) {
       return res.status(401).json({ error: "Credenciales inválidas" });
     }
 

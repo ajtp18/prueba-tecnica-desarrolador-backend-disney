@@ -19,7 +19,7 @@ router.post("/movies", requireAuth, async (req, res) => {
     res.status(201).json(peliSerie);
   } catch (error) {
     console.error("Error al crear la película/serie:", error);
-    res.status(500).json({ error: "Error al crear la película/serie" });
+    return res.status(500).json({ error: "Error al crear la película/serie", error });
   }
 });
 

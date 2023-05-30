@@ -26,7 +26,6 @@ paths:
         "500":
           description: Error interno del servidor.
 
-
     post:
       summary: Crear un nuevo personaje
       description: Crea un nuevo personaje asociado a una película/serie existente.
@@ -149,6 +148,25 @@ paths:
           description: No autorizado.
         "404":
           description: Personaje no encontrado.
+        "500":
+          description: Error interno del servidor.
+  /movies:
+    get:
+      summary: Listar todos los personajes de la base de datos.
+      description: Se hace una peticion get a la base de datos para listar todos los personajes existentes.
+      response:
+        "200":
+          description: Lista de personajes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Personaje"
+        "400":
+          description: Solicitud inválida.
+        "401":
+          description: No autorizado.
+        "404":
+          description: La película/serie no existe.
         "500":
           description: Error interno del servidor.
 components:

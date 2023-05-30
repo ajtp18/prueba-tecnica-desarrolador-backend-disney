@@ -18,7 +18,6 @@ const PeliculaSerie = sequelize.define(
     fechaCreacion: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
     calificacion: {
       type: DataTypes.INTEGER,
